@@ -1,0 +1,21 @@
+{
+  "name": "Kawsar Ahmed - Software Engineer",
+  "short_name": "Kawsar Ahmed",
+  "description": "Portfolio website showcasing innovative software solutions and projects",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#18181B",
+  "theme_color": "#18181B",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon-16x16.svg",
+      "sizes": "16x16",
+      "type": "image/svg+xml"
+    }
+  ]
+}

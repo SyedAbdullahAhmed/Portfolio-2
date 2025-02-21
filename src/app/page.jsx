@@ -1,23 +1,63 @@
 "use client";
+import dynamic from 'next/dynamic';
 import { SparklesCore } from "../components/ui/sparkles";
 import { TracingBeam } from "../components/ui/tracing-beam";
 import { TypewriterEffect } from "../components/ui/typewriter-effect";
 import { BackgroundBeams } from "../components/ui/background-beams";
 import Image from "next/image";
-import { Globe } from "../components/ui/globe";
-import { ProfilePin } from "../components/ui/3d-pin";
 import { Footer } from "../components/ui/footer";
-import { ContactSection } from "../components/ui/contact-section";
 import { motion } from "framer-motion";
 import { Timeline } from "../components/ui/timeline";
-import { Achievements } from "../components/ui/achievements";
-import { AIChatbot } from "../components/ui/ai-chat";
-import { AchievementsCarousel } from "../components/ui/achievements-carousel";
 import { FloatingNav } from "../components/ui/floating-navbar";
 import { DownloadButton } from "../components/ui/download-button";
 import { SkillsMarquee } from "../components/ui/skills-marquee";
+import { educationData } from "../data/educationData";
+import { experienceData } from "../data/experienceData";
+import { projects } from "../data/projectData";
+import { useEffect, useState } from "react";
+
+// Dynamically import non-critical components with ssr: false
+const Globe = dynamic(() => import('../components/ui/globe').then(mod => mod.Globe), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[500px] flex items-center justify-center bg-slate-900/50 rounded-lg animate-pulse">
+      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+});
+
+const ProfilePin = dynamic(() => import('../components/ui/3d-pin').then(mod => mod.ProfilePin), {
+  ssr: false,
+  loading: () => <div className="w-[320px] h-[320px] bg-slate-900/50 rounded-lg animate-pulse" />
+});
+
+const ContactSection = dynamic(() => import('../components/ui/contact-section').then(mod => mod.ContactSection), {
+  ssr: false
+});
+
+const Achievements = dynamic(() => import('../components/ui/achievements').then(mod => mod.Achievements), {
+  ssr: false
+});
+
+const AIChatbot = dynamic(() => import('../components/ui/ai-chat').then(mod => mod.AIChatbot), {
+  ssr: false
+});
+
+const AchievementsCarousel = dynamic(() => import('../components/ui/achievements-carousel').then(mod => mod.AchievementsCarousel), {
+  ssr: false
+});
 
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // or a loading spinner
+  }
+
   const navItems = [
     {
       name: "Home",
@@ -48,153 +88,134 @@ export default function Home() {
 
   const words = [
     {
-      text: "Build",
+      text: "Building",
+      className: "text-blue-500"
     },
     {
-      text: "awesome",
+      text: "the",
     },
     {
-      text: "apps",
+      text: "future",
+      className: "text-purple-500"
     },
     {
       text: "with",
     },
     {
-      text: "ease.",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-  ];
-
-  const projects = [
-    {
-      id: 1,
-      title: "Code Battelion 1.0",
-      description: "A cutting-edge Website for Intra University CSE Fest Segment Registration(eg. Hackathon, IUPC, Project Showcasing).",
-      image: "/code-battelion.png",
-      techStack: ["Next.js", "Django", "DRF", "Webmail Integration"],
-      liveLink: "https://cse-fest-ebon.vercel.app/",
-      codeLink: "https://github.com/yourusername/project-repo",
-    },
-    {
-      id: 2,
-      title: "Image to Text Converter AI",
-      description: "A web application that converts images to text using OCR technology.",
-      image: "/imgtotext.png",
-      techStack: ["Next.js", "Django", "DRF", "OCR"],
-      liveLink: "https://img-to-text-zeta.vercel.app/",
-      codeLink: "https://github.com/yourusername/project-repo",
-    },
-    {
-      id: 3,
-      title: "Motivator AI",
-      description: "A web application that motivates users via Quran to achieve their goals.",
-      image: "/motive.png",
-      techStack: ["Next.js", "Django", "DRF", "OCR"],
-      liveLink: "https://motivator-ai.vercel.app/",
-      codeLink: "https://github.com/yourusername/project-repo",
-    },
-    {
-      id: 4,
-      title: "Exclusive Private Tutoring",
-      description: "A Website for Private Tutoring, It Was Built When i was working on College Master Mind.",
-      image: "/ept.png",
-      techStack: ["Next.js", "Django", "DRF", "OCR"],
-      liveLink: "https://dev-phase.vercel.app/",
-      codeLink: "https://github.com/yourusername/project-repo",
-    },
-    
-  ];
-
-  const educationData = [
-    {
-      title: "Bachelor of Science in Computer Science",
-      date: "2019 - 2023",
-      institution: "Bangladesh Army International University of Science and Technology",
-      description: "CSE, CGPA: 2.96",
-      skills: ["Data Structures", "Operating System", "Software Engineering", "AI & ML"],
-    },
-    {
-      title: "Higher Secondary Certificate (HSC)",
-      date: "2017 - 2019",
-      institution: "Cumilla Collectorate School and College",
-      description: "Group: Science, GPA: 5.00",
-      skills: ["Physics", "Mathematics", "Chemistry", "Biology"],
-    },
-    {
-      title: "Secondary School Certificate (SSC)",
-      date: "2015 - 2017",
-      institution: "Chauddagram HJ Model Pilot Govt. High School",
-      description: "Group: Science, GPA: 4.50",
-      skills: ["Mathematics", "Science", "Programming Basics"],
-    },
-  ];
-
-  const experienceData = [
-    {
-      title: "Wa-Mac (Remote)",
-      date: "2021 - Present",
-      company: "Property Management System",
-      role: "Full Stack Developer",
-      location: "Phoenix, AZ, USA",
-      description: "Developed a Property Management System for a real estate company. The system allows property owners to manage their properties and tenants.",
-      skills: ["Next.js","TypeScript","TailwindCSS","Shadcn/UI", "Django", "DRF"],
-    },
-    {
-      title: "College Master Mind (Remote)",  
-      date: "2021 - Present",
-      company: "College Management System",
-      role: "Full Stack Developer",
-      location: "Phoenix, AZ, USA",
-      description: "Developed a College Management System for the company. The system allows students to manage their courses and assignments.",
-      skills: ["Next.js","TypeScript","TailwindCSS","Shadcn/UI", "Django", "DRF"],
-    },
-    {
-      title: "Digital Marketer (Remote)",
-      date: "2023 - 2024",
-      company: "NexTech Fusion",
-      role: "Digital Marketing Specialist",
-      location: "Dhaka, Bangladesh",
-      description: "I worked as a digital marketer for the company. I was responsible for the company's social media presence and marketing campaigns.",
-      skills: ["SEO", "Content Writing", "Social Media Marketing", "Email Marketing"],
+      text: "code.",
+      className: "text-cyan-400"
     },
   ];
 
   return (
     <div className="min-h-screen bg-black overflow-hidden">
       <FloatingNav navItems={navItems} />
-      {/* Hero Section - Make it more responsive */}
-      <div id="home" className="h-[40rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md px-4 sm:px-6">
+      {/* Hero Section */}
+      <div id="home" className="min-h-screen relative w-full bg-black flex flex-col items-center justify-center 
+                           overflow-hidden px-4 sm:px-6 py-12 md:py-0">
         {/* Background Sparkles */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full opacity-50 md:opacity-100">
           <SparklesCore
             id="tsparticlesfullpage"
             background="transparent"
             minSize={0.6}
             maxSize={1.4}
-            particleDensity={100}
+            particleDensity={50}
             className="w-full h-full"
             particleColor="#FFFFFF"
           />
         </div>
         
         {/* Content */}
-        <div className="relative z-50 flex flex-col items-center gap-8 w-full max-w-7xl mx-auto">
-          <div className="relative w-full max-w-[200px] sm:max-w-xs">
-            <ProfilePin />
+        <div className="relative z-20 flex flex-col-reverse md:flex-row items-center 
+                        justify-center w-full max-w-7xl mx-auto gap-2 md:gap-8">
+          {/* Left Column - Text Content */}
+          <div className="flex-1 text-center md:text-left space-y-3 md:space-y-8">
+            <motion.h1 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white"
+            >
+              Hello, I'm Kawsar
+            </motion.h1>
+            <div className="space-y-2 md:space-y-4">
+              <div className="hidden md:block">
+                <TypewriterEffect words={words} />
+              </div>
+              <div className="md:hidden">
+                <h2 className="text-xl sm:text-2xl font-semibold">
+                  <span className="text-blue-500">Building</span> the 
+                  <span className="text-purple-500"> future</span> with
+                  <span className="text-cyan-400"> code.</span>
+                </h2>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto md:mx-0"
+              >
+                Full Stack Developer | Problem Solver | Tech Enthusiast
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                className="flex flex-col sm:flex-row gap-2 md:gap-4 justify-center md:justify-start"
+              >
+                <a
+                  href="#contact"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium text-white 
+                           bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+                           hover:from-blue-600 hover:via-purple-600 hover:to-pink-600
+                           transition-all duration-300 transform hover:scale-105
+                           shadow-[0_0_20px_rgba(96,165,250,0.5)]"
+                >
+                  Get in Touch
+                </a>
+                <a
+                  href="#projects"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium
+                           border border-gray-700 text-gray-300
+                           hover:border-gray-500 hover:text-white
+                           transition-all duration-300 transform hover:scale-105
+                           bg-black/50 backdrop-blur-sm"
+                >
+                  View Projects
+                </a>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Right Column - Profile Pin */}
+          <div className="flex-1 flex justify-center items-center w-full md:w-auto mb-4 md:mb-0">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="w-[160px] sm:w-[200px] md:w-[280px] lg:w-[320px]"
+            >
+              <div className="relative">
+                <div>
+                  <ProfilePin />
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
       {/* Content Section */}
       <TracingBeam className="px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto antialiased pt-4 relative">
+        <div className="max-w-6xl mx-auto antialiased pt-8 md:pt-4 relative">
           {/* About Section */}
-          <div id="about" className="mb-10">
+          <div id="about" className="mb-10 md:mb-20">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">About Me</h2>
             <p className="text-gray-300 text-sm sm:text-base mb-6">
             I'm Kawsar, a passionate software engineer with a love for problem-solving and exploring new technologies. My expertise lies in web development, particularly with Django and Python. I'm always eager to learn and take on new challenges in the field.
             </p>
-            <div className="flex justify-start">
+            <div className="flex justify-center sm:justify-start">
               <DownloadButton />
             </div>
           </div>
@@ -256,7 +277,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-0">
-              {projects.map((project) => (
+              {projects.map((project, index) => (
                 <div
                   key={project.id}
                   className="relative bg-slate-900 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
@@ -266,7 +287,10 @@ export default function Home() {
                       src={project.image}
                       alt={project.title}
                       fill
+                      priority={index === 0}
                       className="object-cover transform group-hover:scale-110 transition-transform duration-300"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      quality={75}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>

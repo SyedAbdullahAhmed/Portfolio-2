@@ -56,6 +56,8 @@ export const ThreeDCard = ({ items }) => {
                 width={400}
                 height={200}
                 className="h-full w-full object-cover"
+                loading="lazy"
+                quality={75}
               />
             </div>
             <div className="mt-4">

@@ -1,28 +1,78 @@
-import { Space_Grotesk, Orbitron } from "next/font/google";
+import { JetBrains_Mono, Fira_Code } from "next/font/google";
 import "./globals.css";
+import { Suspense } from 'react';
+import { LoadingSpinner } from '@/components/ui/loading';
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const firaCode = Fira_Code({
+  variable: "--font-fira",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
   title: "Kawsar Ahmed | Software Engineer",
   description: "Portfolio website showcasing innovative software solutions and projects",
+  icons: {
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/favicon.svg",
+        href: "/favicon.svg",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/favicon.svg",
+        href: "/favicon.svg",
+      }
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+    other: {
+      rel: "apple-touch-icon",
+      url: "/favicon.svg",
+    },
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link 
+          rel="preconnect" 
+          href="https://fonts.googleapis.com" 
+          crossOrigin="anonymous"
+        />
+        <link 
+          rel="dns-prefetch" 
+          href="https://fonts.googleapis.com"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon.svg"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon-16x16.svg"
+          sizes="16x16"
+        />
+        <meta name="theme-color" content="#18181B" />
+      </head>
       <body
-        className={`${spaceGrotesk.variable} ${orbitron.variable} antialiased`}
+        className={`${jetbrainsMono.variable} ${firaCode.variable} antialiased`}
       >
-        {children}
+        <Suspense fallback={<LoadingSpinner />}>
+          {children}
+        </Suspense>
       </body>
     </html>
   );

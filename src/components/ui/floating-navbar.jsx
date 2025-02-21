@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,11 @@ export const FloatingNav = ({ navItems: propNavItems }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [hovering, setHovering] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const moveSelectedTabToTop = (idx) => {
     const newNavItems = [...propNavItems];
@@ -19,7 +24,9 @@ export const FloatingNav = ({ navItems: propNavItems }) => {
     setActive(newNavItems[0]);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!isMounted) return;
+
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       setIsScrolled(currentScrollPos > 0);
@@ -29,7 +36,9 @@ export const FloatingNav = ({ navItems: propNavItems }) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
+  }, [prevScrollPos, isMounted]);
+
+  if (!isMounted) return null;
 
   return (
     <AnimatePresence mode="wait">
@@ -38,9 +47,9 @@ export const FloatingNav = ({ navItems: propNavItems }) => {
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           className={cn(
-            "fixed top-4 inset-x-0 mx-auto max-w-fit z-[100] rounded-full border border-transparent bg-black/50 backdrop-blur-md",
+            "fixed top-4 inset-x-0 mx-auto max-w-fit z-[100] rounded-full border border-transparent bg-black/50 backdrop-blur-md will-change-transform",
             isScrolled && "border-white/[0.2] bg-black/70"
           )}
         >

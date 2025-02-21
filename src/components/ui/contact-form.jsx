@@ -1,24 +1,59 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser';
 
 export const ContactForm = () => {
+  const form = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    emailjs.init('3_xuaiMKpN0OfbXYB');
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setIsSubmitting(true);
-    // Add your form submission logic here
-    setTimeout(() => {
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      // Using send() instead of sendForm() with the template that worked
+      const result = await emailjs.send(
+        'service_lxbxrpv',
+        'template_w71ooby',
+        {
+          user_name: formData.name,
+          user_email: formData.email,
+          message: formData.message,
+        }
+      );
+
+      if (result.text === 'OK') {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Message sent successfully! I will get back to you soon.'
+        });
+        setFormData({ name: "", email: "", message: "" });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Failed to send message. Please try again.'
+      });
+    } finally {
+      setIsLoading(false);
       setIsSubmitting(false);
-      setFormData({ name: "", email: "", message: "" });
-    }, 1000);
+    }
   };
 
   return (
@@ -32,13 +67,28 @@ export const ContactForm = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      {submitStatus.message && (
+        <div className={`mb-4 p-3 rounded-md ${
+          submitStatus.type === 'success' 
+            ? 'bg-green-500/10 text-green-500 border border-green-500/20' 
+            : 'bg-red-500/10 text-red-500 border border-red-500/20'
+        }`}>
+          {submitStatus.message}
+        </div>
+      )}
+
+      <form 
+        ref={form} 
+        onSubmit={handleSubmit} 
+        className={`space-y-6 ${isLoading ? 'opacity-50 pointer-events-none' : ''}`}
+      >
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-slate-300">
             Name
           </label>
           <input
             type="text"
+            name="user_name" // Important: name attribute for EmailJS
             id="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -53,6 +103,7 @@ export const ContactForm = () => {
           </label>
           <input
             type="email"
+            name="user_email" // Important: name attribute for EmailJS
             id="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -67,6 +118,7 @@ export const ContactForm = () => {
           </label>
           <textarea
             id="message"
+            name="message" // Important: name attribute for EmailJS
             rows={4}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}

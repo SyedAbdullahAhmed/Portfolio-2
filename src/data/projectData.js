@@ -1,0 +1,38 @@
+export const projects = [
+  {
+    id: 1,
+    title: "Code Battelion 1.0",
+    description: "A cutting-edge Website for Intra University CSE Fest Segment Registration(eg. Hackathon, IUPC, Project Showcasing).",
+    image: "/code-battelion.png",
+    techStack: ["Next.js", "Django", "DRF", "Webmail Integration"],
+    liveLink: "https://cse-fest-ebon.vercel.app/",
+    codeLink: "https://github.com/curl-kawsar",
+  },
+  {
+    id: 2,
+    title: "Help Hash - A Donation Platform",
+    description: "A web application that helps users to donate to the needy people.",
+    image: "/helphash.png",
+    techStack: ["Next.js", "TailwindCSS", "Framer Motion", "MongoDB", "Email Integration", "SMS Integration"],
+    liveLink: "https://helphashorg.vercel.app/",
+    codeLink: "https://github.com/curl-kawsar",
+  },
+  {
+    id: 3,
+    title: "BAIUST Online Judge - A Competitive Programming Platform",
+    description: "A web application that helps users to practice competitive programming problems.",
+    image: "/baiust-oj.png",
+    techStack: ["Next.js", "Django", "DRF", "Nodejs", "TailwindCSS"],
+    liveLink: "https://baiust-online-judge.vercel.app/",
+    codeLink: "https://github.com/curl-kawsar",
+  },
+  {
+    id: 4,
+    title: "Exclusive Private Tutoring",
+    description: "A Website for Private Tutoring, It Was Built When i was working on College Master Mind.",
+    image: "/ept.png",
+    techStack: ["Next.js", "Django", "DRF", "OCR"],
+    liveLink: "https://dev-phase.vercel.app/",
+    codeLink: "https://github.com/curl-kawsar",
+  },
+]; 
