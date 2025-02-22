@@ -135,42 +135,25 @@ export default function CodeEditor() {
     setOutput('');
 
     try {
-      const submitOptions = {
+      const response = await fetch('/api/code', {
         method: 'POST',
-        url: 'https://judge0-ce.p.sulu.sh/submissions',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: 'Bearer sk_live_iEXIQkRSxalPYDc3L2cLafXRRvfTx5yu'
         },
-        data: {
-          language_id: language === 'python' ? '71' : '63', // 71 for Python, 63 for JavaScript
-          source_code: code
-        }
-      };
+        body: JSON.stringify({
+          code,
+          language
+        })
+      });
 
-      const submitResponse = await axios.request(submitOptions);
-      const token = submitResponse.data.token;
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const resultOptions = {
-        method: 'GET',
-        url: `https://judge0-ce.p.sulu.sh/submissions/${token}`,
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer sk_live_iEXIQkRSxalPYDc3L2cLafXRRvfTx5yu'
-        }
-      };
-
-      const resultResponse = await axios.request(resultOptions);
+      const data = await response.json();
       
-      if (resultResponse.data.stdout) {
-        setOutput(decodeBase64(resultResponse.data.stdout));
-      } else if (resultResponse.data.stderr) {
-        setOutput(`Error: ${decodeBase64(resultResponse.data.stderr)}`);
-      } else if (resultResponse.data.compile_output) {
-        setOutput(`Compilation Error: ${decodeBase64(resultResponse.data.compile_output)}`);
+      if (data.stdout) {
+        setOutput(decodeBase64(data.stdout));
+      } else if (data.stderr) {
+        setOutput(`Error: ${decodeBase64(data.stderr)}`);
+      } else if (data.compile_output) {
+        setOutput(`Compilation Error: ${decodeBase64(data.compile_output)}`);
       } else {
         setOutput('No output generated');
       }
