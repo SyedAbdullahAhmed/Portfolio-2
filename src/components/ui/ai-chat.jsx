@@ -61,14 +61,37 @@ export const AIChatbot = () => {
     setInput("");
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://kawsar-assistant-b9a8473899bc.herokuapp.com/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: input
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('API Response:', data);
+      
       setMessages(prev => [...prev, {
-        text: "I understand your query. I'm processing the information to provide you with the best possible response...",
+        text: data.response || data.message || data.text || "Sorry, I couldn't process your request.",
         isBot: true
       }]);
+    } catch (error) {
+      console.error('Error:', error);
+      setMessages(prev => [...prev, {
+        text: "Sorry, I encountered an error. Please try again later.",
+        isBot: true
+      }]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   // Auto-scroll to bottom when new messages arrive
