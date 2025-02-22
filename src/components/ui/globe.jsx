@@ -27,12 +27,12 @@ export function Globe() {
       phi: 0,
       theta: 0.3,
       dark: 1,
-      diffuse: 3,
+      diffuse: 1.2,
       mapSamples: 16000,
-      mapBrightness: 1.2,
-      baseColor: [0.1, 0.1, 0.35],
+      mapBrightness: 6,
+      baseColor: [0.3, 0.3, 0.6],
       markerColor: [0.1, 0.8, 1],
-      glowColor: [0.1, 0.8, 1],
+      glowColor: [0.2, 0.4, 1],
       markers: [
         { location: [23.4607, 91.1809], size: 0.1 } // Cumilla, Bangladesh
       ],
@@ -67,8 +67,8 @@ export function Globe() {
         <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center z-20 flex flex-col items-center gap-1">
           <p className="text-white/90 text-sm font-light">Cumilla, Bangladesh</p>
           <div className="flex items-center justify-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#0ff] animate-pulse" />
-            <p className="text-[#0ff] text-xs font-light">Live</p>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#4d94ff] animate-pulse" />
+            <p className="text-[#4d94ff] text-xs font-light">Live</p>
           </div>
         </div>
       </div>

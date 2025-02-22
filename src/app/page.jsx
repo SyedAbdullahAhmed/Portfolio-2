@@ -15,7 +15,7 @@ import { educationData } from "../data/educationData";
 import { experienceData } from "../data/experienceData";
 import { projects } from "../data/projectData";
 import { useEffect, useState } from "react";
-
+import CodeEditor from "../components/ui/codeEditor";
 // Dynamically import non-critical components with ssr: false
 const Globe = dynamic(() => import('../components/ui/globe').then(mod => mod.Globe), {
   ssr: false,
@@ -382,6 +382,23 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Code Editor Game Section */}
+          <div className="mb-20">
+            <div className="text-center mb-12">
+              <TypewriterEffect
+                words={[
+                  { text: "Code" },
+                  { text: "Challenge", className: "text-blue-500" },
+                  { text: "Game" },
+                ]}
+              />
+              <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
+                Test your Python skills with these fun coding challenges!
+              </p>
+            </div>
+            <CodeEditor />
           </div>
 
           {/* Achievements Section */}
