@@ -19,7 +19,7 @@ export const experienceData = [
   },
   {
     title: "Digital Marketer (Remote)",
-    date: "2023 - 2024",
+    date: "2019 - 2022",
     company: "NexTech Fusion",
     role: "Digital Marketing Specialist",
     location: "Dhaka, Bangladesh",
