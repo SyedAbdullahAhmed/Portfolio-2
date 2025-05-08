@@ -65,7 +65,7 @@ export function Globe() {
           }}
         />
         <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center z-20 flex flex-col items-center gap-1">
-          <p className="text-white/90 text-sm font-light">Cumilla, Bangladesh</p>
+          <p className="text-white/90 text-sm font-light">Karachi, Pakistan</p>
           <div className="flex items-center justify-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-[#4d94ff] animate-pulse" />
             <p className="text-[#4d94ff] text-xs font-light">Live</p>

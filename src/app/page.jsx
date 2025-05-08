@@ -28,7 +28,7 @@ const Globe = dynamic(() => import('../components/ui/globe').then(mod => mod.Glo
 
 const ProfilePin = dynamic(() => import('../components/ui/3d-pin').then(mod => mod.ProfilePin), {
   ssr: false,
-  loading: () => <div className="w-[320px] h-[320px] bg-slate-900/50 rounded-lg animate-pulse" />
+  loading: () => <div className="poppins w-[320px] h-[320px] bg-slate-900/50 rounded-lg animate-pulse" />
 });
 
 const ContactSection = dynamic(() => import('../components/ui/contact-section').then(mod => mod.ContactSection), {
@@ -70,14 +70,14 @@ export default function Home() {
       value: "about",
     },
     {
-      name: "Projects",
-      link: "#projects",
-      value: "projects",
-    },
-    {
       name: "Experience",
       link: "#experience",
       value: "experience",
+    },
+    {
+      name: "Projects",
+      link: "#projects",
+      value: "projects",
     },
     {
       name: "Contact",
@@ -108,7 +108,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-black overflow-hidden">
+    <div className="poppins min-h-screen bg-black overflow-hidden">
       <FloatingNav navItems={navItems} />
       {/* Hero Section */}
       <div id="home" className="min-h-screen relative w-full bg-black flex flex-col items-center justify-center 
@@ -128,23 +128,27 @@ export default function Home() {
         
         {/* Content */}
         <div className="relative z-20 flex flex-col-reverse md:flex-row items-center 
-                        justify-center w-full max-w-7xl mx-auto gap-2 md:gap-8">
+                        justify-center w-full md:w-[80vw] max-w-7xl mx-auto gap-2 md:gap-8">
+
+
+
+
           {/* Left Column - Text Content */}
-          <div className="flex-1 text-center md:text-left space-y-3 md:space-y-8">
+          <div className="flex-1 text-center md:text-left space-y-3 md:space-y-8 ">
             <motion.h1 
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white"
+              className="poppins text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-white"
             >
-              Hello, I'm Kawsar
+              Hello, I'm Abdullah
             </motion.h1>
-            <div className="space-y-2 md:space-y-4">
+            <div className="space-y-2 md:space-y-4 w-[39vw] ">
               <div className="hidden md:block">
                 <TypewriterEffect words={words} />
               </div>
               <div className="md:hidden">
-                <h2 className="text-xl sm:text-2xl font-semibold">
+                <h2 className="poppins text-xl sm:text-2xl font-semibold  ">
                   <span className="text-blue-500">Building</span> the 
                   <span className="text-purple-500"> future</span> with
                   <span className="text-cyan-400"> code.</span>
@@ -188,6 +192,11 @@ export default function Home() {
             </div>
           </div>
 
+
+
+
+
+
           {/* Right Column - Profile Pin */}
           <div className="flex-1 flex justify-center items-center w-full md:w-auto mb-4 md:mb-0">
             <motion.div 
@@ -206,24 +215,42 @@ export default function Home() {
         </div>
       </div>
 
+
+
+
+
+
       {/* Content Section */}
       <TracingBeam className="px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto antialiased pt-8 md:pt-4 relative">
+
+
+
           {/* About Section */}
           <div id="about" className="mb-10 md:mb-20">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">About Me</h2>
-            <p className="text-gray-300 text-sm sm:text-base mb-6">
-            I'm Kawsar, a passionate software engineer with a love for problem-solving and exploring new technologies. My expertise lies in web development, particularly with Django and Python. I'm always eager to learn and take on new challenges in the field.
+            <h2 className="poppins text-2xl sm:text-3xl font-bold text-white mb-4">About Me</h2>
+            <p className="poppins text-gray-300 text-sm sm:text-base mb-6">
+            I'm Abdullah, a passionate software engineer with a love for problem-solving and exploring new technologies. My expertise lies in web development, particularly with Django and Python. I'm always eager to learn and take on new challenges in the field.
             </p>
             <div className="flex justify-center sm:justify-start">
               <DownloadButton />
             </div>
           </div>
 
+
           {/* Skills Section */}
           <div className="mb-20">
             <SkillsMarquee />
           </div>
+
+
+
+
+
+
+
+
+
 
           {/* Experience Section */}
           <div id="experience" className="mb-20">
@@ -231,15 +258,22 @@ export default function Home() {
               <TypewriterEffect
                 words={[
                   { text: "Professional" },
-                  { text: "Experience", className: "text-blue-500" },
+                  { text: "Experience", className: "text-blue-500 poppins " },
                 ]}
               />
-              <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              <p className="poppins text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
                 My professional journey and work experience in the tech industry.
               </p>
             </div>
             <Timeline data={experienceData} type="experience" />
           </div>
+
+
+
+
+
+
+
 
           {/* Education Section */}
           <div id="education" className="mb-20">
@@ -247,11 +281,11 @@ export default function Home() {
               <TypewriterEffect
                 words={[
                   { text: "Education" },
-                  { text: "&", className: "text-blue-500" },
+                  { text: "&", className: "poppins text-blue-500" },
                   { text: "Qualifications" },
                 ]}
               />
-              <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              <p className="poppins text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
                 My academic journey and qualifications that shaped my career.
               </p>
             </div>
@@ -261,17 +295,23 @@ export default function Home() {
             />
           </div>
 
+
+
+
+
+
+
           {/* Projects Section */}
           <div id="projects" className="mb-20">
             <div className="text-center mb-12">
               <TypewriterEffect
                 words={[
                   { text: "Featured" },
-                  { text: "Projects", className: "text-blue-500" },
+                  { text: "Projects", className: "poppins text-blue-500" },
                   { text: "Showcase" },
                 ]}
               />
-              <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              <p className="poppins text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
                 Explore my latest projects showcasing innovative solutions and modern technologies.
               </p>
             </div>
@@ -295,10 +335,10 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
                   <div className="p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                    <h3 className="poppins text-lg sm:text-xl  text-white mb-2 group-hover:text-blue-400 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-400 mb-4">
+                    <p className="poppins text-xs sm:text-sm text-slate-400 mb-4">
                       {project.description}
                     </p>
                     
@@ -307,7 +347,7 @@ export default function Home() {
                       {project.techStack.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+                          className="poppins px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
                         >
                           {tech}
                         </span>
@@ -318,10 +358,11 @@ export default function Home() {
                     <div className="flex items-center gap-3">
                       {project.liveLink && (
                         <a
-                          href={project.liveLink}
+                          // href={project.liveLink}
+                          href="#"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="relative px-4 py-1.5 text-sm font-medium text-white rounded-full
+                          className="poppins relative px-4 py-1.5 text-sm font-medium text-white rounded-full
                                    bg-[linear-gradient(black,black),linear-gradient(to_right,#FF007A,#00D1FF)]
                                    [background-clip:padding-box,border-box] [background-origin:padding-box,border-box]
                                    border-2 border-transparent hover:scale-105 transition-transform duration-200
@@ -352,7 +393,8 @@ export default function Home() {
                       
                       {project.codeLink && (
                         <a
-                          href={project.codeLink}
+                          // href={project.codeLink}
+                          href="#"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="relative px-4 py-1.5 text-sm font-medium text-white rounded-full
@@ -384,40 +426,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Code Editor Game Section */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <TypewriterEffect
-                words={[
-                  { text: "Code" },
-                  { text: "Challenge", className: "text-blue-500" },
-                  { text: "Game" },
-                ]}
-              />
-              <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
-                Test your Python skills with these fun coding challenges!
-              </p>
-            </div>
-            <CodeEditor />
-          </div>
 
-          {/* Achievements Section */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <TypewriterEffect
-                words={[
-                  { text: "My" },
-                  { text: "Achievements", className: "text-blue-500" },
-                ]}
-              />
-              <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-4">
-                Milestones and accomplishments throughout my journey.
-              </p>
-            </div>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <AchievementsCarousel />
-            </div>
-          </div>
+
+
+
         </div>
       </TracingBeam>
       
@@ -429,7 +441,7 @@ export default function Home() {
       <BackgroundBeams />
 
       {/* AI Chatbot */}
-      <AIChatbot />
+      {/* <AIChatbot /> */}
     </div>
   );
 }

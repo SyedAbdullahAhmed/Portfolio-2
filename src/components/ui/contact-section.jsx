@@ -5,8 +5,8 @@ import { Globe } from "./globe";
 export const ContactSection = () => {
   return (
     <div className="relative py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-6 w-[80vw]">
+        <div className="ml-10 flex flex-col md:grid md:grid-cols-2 gap-12 items-center ">
           {/* Contact Form - Always First */}
           <div className="w-full">
             <ContactForm />

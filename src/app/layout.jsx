@@ -1,7 +1,13 @@
-import { JetBrains_Mono, Fira_Code } from "next/font/google";
+import { JetBrains_Mono, Fira_Code, Poppins } from "next/font/google";
 import "./globals.css";
 import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/ui/loading';
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ['300','400', '500', '600', '700'],
+  subsets: ["latin"],
+});
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
@@ -16,7 +22,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata = {
-  title: "Kawsar Ahmed | Software Engineer",
+  title: "Abdullah | Software Engineer",
   description: "Portfolio website showcasing innovative software solutions and projects",
   icons: {
     icon: [
@@ -68,7 +74,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#18181B" />
       </head>
       <body
-        className={`${jetbrainsMono.variable} ${firaCode.variable} antialiased`}
+        className={`${jetbrainsMono.variable} ${firaCode.variable} ${poppins.variable} antialiased`}
       >
         <Suspense fallback={<LoadingSpinner />}>
           {children}

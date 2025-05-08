@@ -50,11 +50,6 @@ const skills: Skill[] = [
     bgColor: "bg-yellow-950/40",
   },
   {
-    name: "Trello",
-    color: "text-blue-500",
-    bgColor: "bg-blue-950/40",
-  },
-  {
     name: "Git",
     color: "text-orange-500",
     bgColor: "bg-orange-950/40",
@@ -70,14 +65,19 @@ const skills: Skill[] = [
     bgColor: "bg-cyan-950/40",
   },
   {
-    name: "AWS",
-    color: "text-orange-400",
-    bgColor: "bg-orange-950/40",
+    name: "MONGODB",
+    color: "text-red-400",
+    bgColor: "bg-red-950/40",
   },
   {
-    name: "Analytics",
+    name: "REDIS",
     color: "text-blue-400",
     bgColor: "bg-blue-950/40",
+  },
+  {
+    name: "GOLANG",
+    color: "text-cyan-400",
+    bgColor: "bg-cyan-950/40",
   },
 ];
 
@@ -87,15 +87,27 @@ export const SkillsMarquee = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10" />
       
       {/* Title */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12 relative z-20">
+      <h2 className="poppins text-3xl md:text-4xl font-bold text-center text-white mb-12 relative z-20">
         Skills & Tools
       </h2>
 
       {/* Marquee Container */}
-      <div className="relative w-full">
+      <div className="relative w-full overflow-hidden">
         {/* First Row - Left to Right */}
-        <div className="flex space-x-12 animate-marquee">
+        <div className="flex space-x-6 items-center animate-marquee">
           {[...skills, ...skills].map((skill, idx) => (
+            <motion.div
+              key={idx}
+              className={`${skill.bgColor} px-6 py-3 rounded-xl border border-slate-700/50 backdrop-blur-sm`}
+              whileHover={{ scale: 1.05, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <span className={`text-lg font-medium ${skill.color}`}>{skill.name}</span>
+            </motion.div>
+          ))}
+        </div>
+        <div className="flex space-x-6 items-center animate-marquee2 mt-4">
+          {[...skills.reverse(), ...skills].map((skill, idx) => (
             <motion.div
               key={idx}
               className={`${skill.bgColor} px-6 py-3 rounded-xl border border-slate-700/50 backdrop-blur-sm`}
@@ -108,7 +120,7 @@ export const SkillsMarquee = () => {
         </div>
 
         {/* Second Row - Right to Left */}
-        <div className="flex space-x-12 animate-marquee2 mt-8">
+        {/* <div className="flex space-x-12 items-center  animate-marquee2 mt-8">
           {[...skills.reverse(), ...skills].map((skill, idx) => (
             <motion.div
               key={idx}
@@ -119,7 +131,7 @@ export const SkillsMarquee = () => {
               <span className={`text-lg font-medium ${skill.color}`}>{skill.name}</span>
             </motion.div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ interface TimelineData {
   institution?: string;
   company?: string;
   location?: string;
+  year?: string;
   role?: string;
   description: string;
   skills: string[];
@@ -52,33 +53,34 @@ export const Timeline = ({ data, type }: TimelineProps) => {
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-slate-900 flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full bg-blue-500 border border-blue-600 p-2" />
               </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-blue-500/80">
-                {item.date}
+              <h3 className="poppins hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-blue-500/80">
+                {item.year}
               </h3>
             </div>
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
-              <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-blue-500/80">
+              <h3 className="poppins md:hidden block text-2xl mb-4 text-left font-bold text-blue-500/80">
                 {item.date}
               </h3>
               <div className="bg-slate-900/80 backdrop-blur-sm p-6 rounded-lg border border-slate-800">
-                <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                <h4 className="poppins text-xl font-bold text-white mb-2">{item.title}</h4>
                 
                 {/* Company/Institution */}
-                <div className="text-blue-400 font-medium">
-                  {type === 'education' ? item.institution : item.company}
+                <div className="poppins text-blue-400 font-medium">
+                  {/* {type === 'education' ? item.institution : item.company} */}
+                  {item.date}
                 </div>
 
                 {/* Role - Only show for experience */}
                 {type === 'experience' && item.role && (
-                  <div className="text-sm text-slate-300 mt-1">
+                  <div className="poppins text-sm text-slate-300 mt-1">
                     {item.role}
                   </div>
                 )}
 
                 {/* Location - Only show for experience */}
                 {type === 'experience' && item.location && (
-                  <div className="flex items-center gap-2 text-sm mt-1">
+                  <div className="poppins flex items-center gap-2 text-sm mt-1">
                     <svg 
                       className="w-4 h-4 text-blue-400" 
                       fill="none" 
@@ -98,17 +100,17 @@ export const Timeline = ({ data, type }: TimelineProps) => {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    <span className="text-blue-400">{item.location}</span>
+                    <span className="poppins text-blue-400">{item.location}</span>
                   </div>
                 )}
 
-                <p className="text-slate-400 my-4">{item.description}</p>
+                <p className="poppins text-slate-400 my-4">{item.description}</p>
                 
                 <div className="flex flex-wrap gap-2">
                   {item.skills.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400"
+                      className="poppins px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400"
                     >
                       {skill}
                     </span>

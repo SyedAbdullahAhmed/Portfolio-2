@@ -6,16 +6,19 @@ import { cn } from "@/lib/utils";
 export const DownloadButton = ({ className }) => {
   return (
     <motion.a
-      href="/resume/kawsar-resume.pdf"
-      download="Kawsar_Ahmed_Resume.pdf"
+      href="/resume/syedRes.pdf"
+      download="Syed_Abdullah_Ahmed_Resume.pdf"
       className={cn(
-        "relative px-5 py-2.5",
+        "relative px-5 py-2.5 ",
         "font-['var(--font-jetbrains)'] font-medium tracking-tight",
         "rounded-full bg-black",
         "border-2 border-transparent",
         "bg-gradient-to-r from-[#FF007A] to-[#00D1FF]",
+        // "bg-gradient-to-r from-[#FF007A] to-[#00D1FF]",
         "[background-clip:padding-box,border-box] [background-origin:padding-box,border-box]",
-        "bg-[linear-gradient(black,black),linear-gradient(to_right,#FF007A,#00D1FF)]",
+        "transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(96,165,250,0.5)]",
+        // "bg-[linear-gradient(black,black),linear-gradient(to_right,#FF007A,#00D1FF)]",
+        // "bg-white",
         "hover:bg-[linear-gradient(black,black),linear-gradient(to_left,#FF007A,#00D1FF)]",
         "transition-all duration-300 flex items-center gap-2",
         "text-white/90 hover:text-white",
@@ -25,7 +28,7 @@ export const DownloadButton = ({ className }) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={(e) => {
-        fetch('/resume/kawsar-resume.pdf')
+        fetch('/resume/syedRes.pdf')
           .then(response => {
             if (!response.ok) {
               e.preventDefault();
@@ -52,10 +55,10 @@ export const DownloadButton = ({ className }) => {
         />
       </svg>
       <span className="inline-flex items-center gap-1">
-        <span className="text-[#FF007A]">Download</span>
-        <span className="text-white/80">(</span>
-        <span className="text-[#00D1FF]">Resume</span>
-        <span className="text-white/80">)</span>
+        <span className="poppins text-white">Download</span>
+        {/* <span className="text-white/80">(</span> */}
+        <span className="poppins text-white">Resume</span>
+        {/* <span className="text-white/80">)</span>  */}
       </span>
     </motion.a>
   );
